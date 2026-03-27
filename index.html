@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanban Board</title>
+    <link rel="stylesheet" href="kanban.css">
+</head>
+<body>
+    <header class="board-header">
+        <h1>Kanban Project Plan</h1>
+    </header>
+
+    <main class="board" id="board">
+        <div class="column" id="col-todo" data-column="todo">
+            <div class="column-header">
+                <h2>To Do</h2>
+                <span class="card-count" id="count-todo">0</span>
+            </div>
+            <div class="card-list" id="list-todo" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <div class="card" draggable="true" ondragstart="dragStart(event)" data-id="1">
+                    <p>Design wireframes</p>
+                    <span class="card-tag tag-design">Design</span>
+                </div>
+                <div class="card" draggable="true" ondragstart="dragStart(event)" data-id="2">
+                    <p>Write project requirements</p>
+                    <span class="card-tag tag-planning">Planning</span>
+                </div>
+                <div class="card" draggable="true" ondragstart="dragStart(event)" data-id="3">
+                    <p>Set up CI/CD pipeline</p>
+                    <span class="card-tag tag-dev">Dev</span>
+                </div>
+            </div>
+            <button class="add-card-btn" onclick="openModal('todo')">+ Add Card</button>
+        </div>
+
+        <div class="column" id="col-inprogress" data-column="inprogress">
+            <div class="column-header">
+                <h2>In Progress</h2>
+                <span class="card-count" id="count-inprogress">0</span>
+            </div>
+            <div class="card-list" id="list-inprogress" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <div class="card" draggable="true" ondragstart="dragStart(event)" data-id="4">
+                    <p>Implement user authentication</p>
+                    <span class="card-tag tag-dev">Dev</span>
+                </div>
+                <div class="card" draggable="true" ondragstart="dragStart(event)" data-id="5">
+                    <p>Create database schema</p>
+                    <span class="card-tag tag-dev">Dev</span>
+                </div>
+            </div>
+            <button class="add-card-btn" onclick="openModal('inprogress')">+ Add Card</button>
+        </div>
+
+        <div class="column" id="col-review" data-column="review">
+            <div class="column-header">
+                <h2>In Review</h2>
+                <span class="card-count" id="count-review">0</span>
+            </div>
+            <div class="card-list" id="list-review" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <div class="card" draggable="true" ondragstart="dragStart(event)" data-id="6">
+                    <p>API endpoint documentation</p>
+                    <span class="card-tag tag-planning">Planning</span>
+                </div>
+            </div>
+            <button class="add-card-btn" onclick="openModal('review')">+ Add Card</button>
+        </div>
+
+        <div class="column" id="col-done" data-column="done">
+            <div class="column-header">
+                <h2>Done</h2>
+                <span class="card-count" id="count-done">0</span>
+            </div>
+            <div class="card-list" id="list-done" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <div class="card" draggable="true" ondragstart="dragStart(event)" data-id="7">
+                    <p>Project kickoff meeting</p>
+                    <span class="card-tag tag-planning">Planning</span>
+                </div>
+            </div>
+            <button class="add-card-btn" onclick="openModal('done')">+ Add Card</button>
+        </div>
+    </main>
+
+    <!-- Add Card Modal -->
+    <div class="modal-overlay" id="modal-overlay" onclick="closeModal()"></div>
+    <div class="modal" id="modal">
+        <h3>Add New Card</h3>
+        <input type="text" id="card-text" placeholder="Card description..." maxlength="120">
+        <select id="card-tag">
+            <option value="tag-dev">Dev</option>
+            <option value="tag-design">Design</option>
+            <option value="tag-planning">Planning</option>
+            <option value="tag-bug">Bug</option>
+        </select>
+        <div class="modal-actions">
+            <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+            <button class="btn-add" onclick="addCard()">Add Card</button>
+        </div>
+    </div>
+
+    <script src="kanban.js"></script>
+</body>
+</html>
